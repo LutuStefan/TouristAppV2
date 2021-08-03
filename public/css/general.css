@@ -1,0 +1,149 @@
+#hotel-name,
+#hotel-description,
+input#address{
+    width: 100%;
+    display: block;
+    margin: 5px 0;
+    border-radius: 5px;
+    height: 35px;
+    border: 1px solid #00000036;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+input#city,
+input#country,
+input#price{
+    width: 50%;
+    display: block;
+    margin: 5px 0 10px 0;
+    border-radius: 5px;
+    height: 35px;
+    border: 1px solid #00000036;
+    box-sizing: border-box;
+    padding: 0 10px;
+}
+
+#add-hotel-section {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+#add-pictore-section {
+    display: none;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 5px 0;
+}
+
+#added-images-section img {
+    width: 100px;
+    margin: 5px;
+    display: inline;
+}
+
+#add-picture {
+    background-color: #004effcf;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 35px;
+    border-radius: 5px;
+    margin: 5px 0 5px 5px;
+    display: inline-block;
+    padding: 7px 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+#save-hotel {
+    background-color: #004effcf;
+    color: white;
+    border: none;
+    width: 150px;
+    height: 35px;
+    border-radius: 5px;
+    margin: 5px 0;
+    display: block;
+    padding: 7px 0;
+    text-align: center;
+    cursor: pointer;
+    align-self: flex-start;
+}
+
+#add-picture:hover,
+#save-hotel:hover
+{
+    background-color: #0053FF;
+}
+#hotel-img {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#hotel-img + label {
+    color: white;
+    background-color: #004effcf;
+    display: inline-block;
+    cursor: pointer;
+    width: 150px;
+    height: 35px;
+    text-align: center;
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding: 7px 0;
+    margin: 0 -3px;
+}
+
+#hotel-img:focus + label,
+#hotel-img + label:hover {
+    background-color: #0053FF;
+}
+
+#hotel-name-and-description-section {
+    width: 100%;
+}
+
+#error-section {
+    align-self: flex-start;
+    margin: 25px 0 15px 0;
+}
+#error-section li {
+    color: orange;
+}
+.rating-container {
+    margin: 10px 0;
+}
+
+.rating-container .checked {
+    color: orange;
+}
+
+.rating-container .fa-star {
+    width: 20px;
+    cursor: pointer;
+}
+
+.app {
+    background-color: #9ba2ab87;
+}
+
+.hotel-element,
+.card-header {
+    background-color: aliceblue;
+}
+
+
+@media (max-width: 700px) {
+    #hotel-img + label {
+        margin: 0 -4px;
+    }
+    #add-picture {
+        display: block;
+        margin-left: 0;
+    }
+}

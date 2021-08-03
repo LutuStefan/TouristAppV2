@@ -1,0 +1,54 @@
+.hotel-element {
+    flex-direction: row;
+    position: relative;
+    display: flex;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: aliceblue;
+    background-clip: border-box;
+    border-radius: .55rem;
+    margin: 10px 0;
+}
+.card-img-top {
+    height: 150px;
+    width: unset;
+    margin: 15px;
+    border-radius: .25rem;
+    align-self: center;
+}
+#search-section {
+    margin-bottom: 25px;
+}
+
+.input-group {
+    display: inline-block;
+    width: unset;
+    position: relative;
+    margin-left: 10px;
+}
+
+.mb-3 {
+    min-width: 250px;
+}
+
+.input-group>.custom-file, .input-group>.custom-select, .input-group>.form-control {
+    width: 250px;
+}
+
+body {
+    background-color: #0070a226;
+}
+
+@media (max-width: 567px) {
+    .hotel-element {
+        flex-direction: column;
+    }
+
+    .card-img-top {
+        align-self: unset;
+    }
+
+    .card-header {
+        font-size: 15px;
+    }
+}

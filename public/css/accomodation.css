@@ -1,0 +1,88 @@
+.img-slider {
+    max-height: 460px;
+    height: auto;
+}
+
+.acomodation-description {
+    padding: 25px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.acomodation-description > #description-wraper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+}
+
+.selectable-date-input{
+    max-width: 200px;
+    border-radius: 1px;
+}
+
+.input-group-adon {
+    margin: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.daterange {
+    max-width: 250px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+.booking-success {
+    color: #1e7e34;
+    font-size: 18px;
+    display: none;
+}
+
+.booking-fail {
+    color: #a8000b;
+    font-size: 18px;
+    display: none;
+}
+
+.datepicker td, .datepicker th {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+#map {
+    height: 350px;
+    padding-bottom: 25px;
+}
+
+#maps {
+    max-width: 135px;
+    align-self: center;
+}
+
+body {
+    background-color: #0070a226;
+}
+
+@media (max-width: 700px) {
+    .img-slider {
+        max-height: 250px;
+        height: auto;
+        max-width: 100%;
+        width: auto;
+    }
+
+    .daterange {
+        max-width: unset;
+    }
+}
+
+@media (max-height: 700px) {
+    .img-slider {
+        max-height: 250px;
+        height: auto;
+        max-width: 100%;
+        width: auto;
+    }
+}

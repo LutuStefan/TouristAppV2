@@ -1,0 +1,51 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: sammy
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: travellistt
+    container_name: travellistt-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - travellistt
+
+  db:
+    image: mysql:5.7
+    container_name: travellistt-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: db
+      MYSQL_ROOT_PASSWORD: db_pass
+      MYSQL_PASSWORD: db_pass
+      MYSQL_USER: db_user
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    networks:
+      - travellistt
+
+  nginx:
+    image: nginx:alpine
+    container_name: travellistt-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - travellistt
+
+networks:
+  travellistt:
+    driver: bridge
