@@ -34,4 +34,5 @@ Route::post('/save-profile-picture', 'UserController@uploadProfilePicture');
 Route::post('/update-user-data', 'UserController@updateUserData');
 Route::post('make-booking', 'HotelController@makeBooking');
 Route::post('/edit-accommodation' , 'HotelController@saveHotelDerailsOnEdit')->name('edit-accommodation-post');
+Route::get('/health-check', 'HomeController@getHomePage');
 
