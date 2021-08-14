@@ -52,7 +52,7 @@
                 <h2>@lang('messages.your-accomodations')</h2>
                 <ul class="list-group">
                     @foreach($userData->hotels as $key => $hotel)
-                        <div class="card-body" style="background-color: white;">
+                        <div class="card-body" style="background-color: white; margin: 10px;">
                             <h5 class="card-title">{{ $hotel->h_name }}</h5>
                             <p class="card-text">{{ $hotel->h_description }}</p>
                             <a href="{{ url('/edit-accommodation'). '?hotel='. $hotel->h_id }}" class="btn btn-primary">@lang('messages.edit-accommodation')</a>

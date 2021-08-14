@@ -60,7 +60,7 @@
                         <div class="col">
                             <div class="collapse multi-collapse" id="show-date-selector">
 
-                                <div style="padding-bottom: 25px; display: flex">
+                                <div style="padding-bottom: 25px; display: flex; justify-content: center">
                                     <input type="text" class="form-control daterange" placeholder="Select a date interval" name="daterange"/>
                                     <button type="button" id="order" class="btn btn-success" data-toggle="modal" data-target="#select-payment-method">@lang('messages.order-now')</button>
                                 </div>
