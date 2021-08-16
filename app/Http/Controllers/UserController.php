@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\HotelRepository;
-use App\User;
 use Illuminate\Http\Request;
 use App\Repositories\Repository;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request as RequestInput;
 use File;
-use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
@@ -65,7 +62,7 @@ class UserController extends Controller
         }
 
         ini_set('memory_limit', '-1');
-        $img = Image::make(Input::file('file'))->orientate();
+        $img = Image::make(app(RequestInput::class)->file('file'))->orientate();
         $img->resize(200, 250)->save($path. $userId .'/profile.jpg', 100);
         return 'images/profile/'. $userId .'/profile.jpg';
     }

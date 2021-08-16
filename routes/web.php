@@ -36,3 +36,7 @@ Route::post('make-booking', 'HotelController@makeBooking');
 Route::post('/edit-accommodation' , 'HotelController@saveHotelDerailsOnEdit')->name('edit-accommodation-post');
 Route::get('/health-check', 'HomeController@getHomePage');
 
+Route::get('/img', 'ImageController@create');
+Route::post('/img', 'ImageController@store');
+Route::get('/img/{image}', 'ImageController@show');
+
