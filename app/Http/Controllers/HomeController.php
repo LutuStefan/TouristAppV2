@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Image;
 use App\Repositories\HotelRepository;
 use Illuminate\Http\Request;
 use App\Repositories\Repository;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use File;
@@ -96,13 +98,13 @@ class HomeController extends Controller
                 'address' => 'max:100|required',
                 'price' => 'numeric|required',
             ]);
-            if ($validator->fails())
-                return array(
-                    'fail' => true,
-                    'errors' => $validator->errors()
-                );
+            if ($validator->fails()) {
+                return view('accommodation.create-accommodation', ['validationErrors' => $validator->errors()]);
+            }
 
-            return $this->hotelRepository->addHotel($request->input());
+
+            $hotelId = $this->hotelRepository->addHotel($request->input());
+            return view('accommodation.accommodation-img', ['hotelId' => $hotelId]);
         } catch (\Exception $e) {
             return $e->getMessage();
         }
@@ -113,15 +115,12 @@ class HomeController extends Controller
         $input = $request->input();
         if(count($input)) {
             $hotels = $this->hotelRepository->getHotelsFiltered($input);
-//            dd($input);
-//            dd($hotels);
-//            $hotels = $this->hotelRepository->hotelsByStars();
         } else {
             $hotels = $this->hotelRepository->hotelsByStars();
         }
 
         foreach ($hotels as $hotel) {
-            $hotel->images = glob("images/" .$hotel->h_id . '/*');
+            $hotel->images = Image::getAllImagesForOwner($hotel->h_id, 'App\Hotels');
         }
         return view('home', compact('hotels'));
     }

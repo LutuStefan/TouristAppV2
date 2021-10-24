@@ -33,7 +33,7 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     @lang('messages.first-page')
                 </a>
-                <a class="navbar-brand" href="/add-hotel">
+                <a class="navbar-brand" href="/create-accommodation">
                     @lang('messages.add-hotel')
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">

@@ -22,7 +22,7 @@ class HotelRepository implements HotelInterface
         $hotel->h_price = $hotelFields['price'];
         $hotel->save();
 
-        return $hotel->id;
+        return $hotel->h_id;
     }
 
     public function editHotel($hotelFields)

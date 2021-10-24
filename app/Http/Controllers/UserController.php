@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Hotels;
 use App\Repositories\HotelRepository;
+use App\User;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Request;
 use App\Repositories\Repository;
 use Illuminate\Http\Request as RequestInput;
 use File;
+use Illuminate\Support\Facades\App;
 use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
@@ -37,12 +41,10 @@ class UserController extends Controller
         }
 
         try {
-            $paths = public_path('images/profile/' . $userId . '/');
-            $filesInFolder = \File::files($paths);
-            $file = pathinfo($filesInFolder[0]);
-            $userData->profileImg = $file['filename']. '.jpg';
+            $userImage = User::getUserProfileImage($userId);
+            $userData->userImage = $userImage;
         } catch (\Exception $e) {
-            $userData->profileImg = null;
+            $userData->userImage = null;
         }
 
         return view('user-profile', compact('userData'));
@@ -65,6 +67,23 @@ class UserController extends Controller
         $img = Image::make(app(RequestInput::class)->file('file'))->orientate();
         $img->resize(200, 250)->save($path. $userId .'/profile.jpg', 100);
         return 'images/profile/'. $userId .'/profile.jpg';
+    }
+
+    public function storeUserProfilePicture(Request $request)
+    {
+        $userId = $request->input('userId');
+        $user = User::find($userId);
+
+        ImageController::deleteImage('profileImage'. $userId . '.jpg');
+        if (App::environment() === "local") {
+            $path = ImageController::storeImageAs($request, 'image', 'profileImage'. $userId . '.jpg', 'public/images/profile/' . $userId);
+            $image = ImageController::storeImagePathIntoDB($path, $user);
+        } else {
+            $path = ImageController::storeImageAs($request, 'image', 'profileImage'. $userId . '.jpg', 'public/images/profile/' . $userId, 's3');
+            $image = ImageController::storeImagePathIntoDB($path, $user, 's3');
+        }
+
+        return $image->url;
     }
 
     public function updateUserData(Request $request)
@@ -98,32 +117,3 @@ class UserController extends Controller
         rmdir($dirPath);
     }
 }
-
-//function correctImageOrientation($filename) {
-//    if (function_exists('exif_read_data')) {
-//        $exif = exif_read_data($filename);
-//        if($exif && isset($exif['Orientation'])) {
-//            $orientation = $exif['Orientation'];
-//            if($orientation != 1){
-//                $img = imagecreatefromjpeg($filename);
-//                $deg = 0;
-//                switch ($orientation) {
-//                    case 3:
-//                        $deg = 180;
-//                        break;
-//                    case 6:
-//                        $deg = 270;
-//                        break;
-//                    case 8:
-//                        $deg = 90;
-//                        break;
-//                }
-//                if ($deg) {
-//                    $img = imagerotate($img, $deg, 0);
-//                }
-//                // then rewrite the rotated image back to the disk as $filename
-//                imagejpeg($img, $filename, 95);
-//            } // if there is some rotation necessary
-//        } // if have the exif orientation info
-//    } // if function exists
-//}

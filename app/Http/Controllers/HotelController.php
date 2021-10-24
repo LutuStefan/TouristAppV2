@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Hotels;
+use App\Image;
 use App\Repositories\HotelRepository;
 use Illuminate\Http\Request;
 use App\Repositories\Repository;
@@ -29,23 +31,13 @@ class HotelController extends Controller
 
     public function viewHotel(Request $request)
     {
-        if(!empty($request->input('hotel'))) {
-            $hotelId = $request->input('hotel');
-        }
+        $hotelId = $request->input('hotel');
+        $hotel = Hotels::find($hotelId);
 
         $hotelData = $this->hotelRepository->getHotelInfo($hotelId);
         $hotelData->bookings = $this->hotelRepository->getBookedDatesForHotel($hotelId);
-        $listOfImages = [];
 
-        $paths = public_path('images/' . $hotelId . '/');
-        $filesInFolder = \File::files($paths);
-        foreach ($filesInFolder as $file) {
-            $fileName = pathinfo($file)['basename'];
-            array_push($listOfImages, $fileName);
-        }
-
-
-        $hotelData->images = $listOfImages;
+        $hotelData->images = Image::getAllImagesForOwner($hotelId, get_class($hotel));
 
         try {
             $aa = 'https://maps.googleapis.com/maps/api/geocode/json?address=' . $hotelData->h_city . '&key=AIzaSyA8Kw2if1GnH4Eh7fQS8_4IvfdpbREWL0w';

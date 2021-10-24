@@ -49,7 +49,7 @@
                         @foreach($hotels as $hotel)
                             <div class="hotel-element">
                                 @foreach($hotel->images as $img)
-                                    <img class="card-img-top" src="{{ $img }}" alt="asdas">
+                                    <img class="card-img-top" src="{{ $img->url }}" alt="asdas">
                                     @break
                                 @endforeach
                                 <div class="card-body">

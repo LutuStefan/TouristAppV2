@@ -12,7 +12,7 @@ $('#add-user-img-input').on('change', function () {
     var fd = new FormData();
     var image = $(this)[0].files[0];
     console.log(image);
-    fd.append('file', image);
+    fd.append('image', image);
     fd.append('userId', $('#userId').val());
     $.ajax({
         url: "/save-profile-picture",

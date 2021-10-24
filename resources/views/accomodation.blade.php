@@ -32,7 +32,7 @@
                 <div class="carousel-inner">
                     @foreach($hotelData->images as $key => $img)
                         <div class="carousel-item @if($key == 0) active @endif">
-                            <img class="rounded img-fluid d-block img-slider" src="images/{{ $hotelData->h_id }}/{{ $img }}" alt="">
+                            <img class="rounded img-fluid d-block img-slider" src="/storage/images/7/5EBZsHIdTtO6vKjJ57hyeLNvZMhqX1LRYzuxQ2N9.jpg" alt="">
                         </div>
                     @endforeach
                 </div>

@@ -5,8 +5,9 @@
         <div class="d-flex justify-content-center">
             <div class="image_outer_container">
                 <div class="image_inner_container">
-                    @if(!empty($userData->profileImg))
-                        <img id="user-profile-picture" src="images/profile/{{ $userData->id }}/{{ $userData->profileImg }}">
+                    @if(!empty($userData->userImage))
+{{--                        {{ dd($userData, $userData->userImage) }}--}}
+                        <img id="user-profile-picture" style="width: 200px; height: auto;" src="{{ $userData->userImage->url}}">
                     @else
                         <img id="user-profile-picture" src="images/profile/generalProfilePictures/profile.jpg">
                     @endif
